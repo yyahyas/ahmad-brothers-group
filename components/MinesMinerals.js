@@ -190,7 +190,7 @@ function ComingSoonCard() {
 
 export default function MinesMinerals() {
   return (
-    <section id="mines" style={{ backgroundColor: '#1a3a2a', padding: '80px 40px', width: '100%' }}>
+    <section id="minerals" style={{ backgroundColor: '#1a3a2a', padding: '80px 40px', width: '100%' }}>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         {/* ── Section header ── */}

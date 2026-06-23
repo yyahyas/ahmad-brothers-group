@@ -3,18 +3,18 @@
 import { useState, useEffect, useRef } from 'react'
 
 const navLinks = [
-  { label: 'Home', href: '#' },
+  { label: 'Home', href: '#home' },
   { label: 'About Us', href: '#about' },
   {
     label: 'Our Businesses',
     href: '#businesses',
     dropdown: [
       { label: 'ABG Foods & Beverages', href: '#foods' },
-      { label: 'ABG Mines & Minerals', href: '#mines' },
-      { label: 'Coming Soon', href: '#', muted: true },
+      { label: 'ABG Mines & Minerals', href: '#minerals' },
+      { label: 'Coming Soon', href: '#businesses', muted: true },
     ],
   },
-  { label: 'Products', href: '#products' },
+  { label: 'Products', href: '#foods' },
   { label: 'Contact', href: '#contact' },
 ]
 
