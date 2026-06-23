@@ -39,6 +39,38 @@ export default function Contact() {
     message: '',
   });
   const [focused, setFocused] = useState('');
+  const [status, setStatus] = useState('')
+  const [loading, setLoading] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    setLoading(true)
+    const formData = {
+      name: e.target.name.value,
+      company: e.target.company.value,
+      email: e.target.email.value,
+      phone: e.target.phone.value,
+      sector: e.target.sector.value,
+      message: e.target.message.value,
+    }
+    try {
+      const response = await fetch('https://formspree.io/f/xwvdpnzq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+      if (response.ok) {
+        setStatus('success')
+        e.target.reset()
+      } else {
+        setStatus('error')
+      }
+    } catch {
+      setStatus('error')
+    } finally {
+      setLoading(false)
+    }
+  }
 
   const set = (field) => (e) => setForm((f) => ({ ...f, [field]: e.target.value }));
   const fieldStyle = (name) => ({
@@ -116,13 +148,14 @@ export default function Contact() {
         </div>
 
         {/* RIGHT COLUMN */}
-        <div style={{ background: '#1a3a2a', borderRadius: '12px', padding: '36px 32px' }}>
+        <form onSubmit={handleSubmit} style={{ background: '#1a3a2a', borderRadius: '12px', padding: '36px 32px' }}>
           <h2 style={{ fontFamily: "'Playfair Display', serif", fontSize: '22px', color: '#faf7f2', marginBottom: '24px', marginTop: 0 }}>
             Send Us a Message
           </h2>
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <input
+              name="name"
               placeholder="Full Name"
               value={form.fullName}
               onChange={set('fullName')}
@@ -131,6 +164,7 @@ export default function Contact() {
               style={fieldStyle('fullName')}
             />
             <input
+              name="company"
               placeholder="Company Name"
               value={form.companyName}
               onChange={set('companyName')}
@@ -142,6 +176,7 @@ export default function Contact() {
 
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '16px' }}>
             <input
+              name="email"
               placeholder="Email"
               type="email"
               value={form.email}
@@ -151,6 +186,7 @@ export default function Contact() {
               style={fieldStyle('email')}
             />
             <input
+              name="phone"
               placeholder="Phone"
               type="tel"
               value={form.phone}
@@ -162,6 +198,7 @@ export default function Contact() {
           </div>
 
           <select
+            name="sector"
             value={form.sector}
             onChange={set('sector')}
             onFocus={() => setFocused('sector')}
@@ -176,6 +213,7 @@ export default function Contact() {
           </select>
 
           <textarea
+            name="message"
             placeholder="Message"
             value={form.message}
             onChange={set('message')}
@@ -184,9 +222,21 @@ export default function Contact() {
             style={{ ...fieldStyle('message'), height: '120px', resize: 'vertical', marginBottom: '20px' }}
           />
 
+          {status === 'success' && (
+            <p style={{ color: '#c8a96e', fontSize: '14px', fontFamily: 'var(--font-inter)', marginBottom: '12px', textAlign: 'center' }}>
+              Message sent! We&apos;ll be in touch soon.
+            </p>
+          )}
+          {status === 'error' && (
+            <p style={{ color: '#f87171', fontSize: '14px', fontFamily: 'var(--font-inter)', marginBottom: '12px', textAlign: 'center' }}>
+              Something went wrong. Please try again.
+            </p>
+          )}
           <button
+            type="submit"
+            disabled={loading}
             style={{
-              background: '#c8a96e',
+              background: loading ? '#a89060' : '#c8a96e',
               color: '#1a3a2a',
               width: '100%',
               padding: '14px',
@@ -194,14 +244,15 @@ export default function Contact() {
               border: 'none',
               fontSize: '15px',
               fontWeight: 600,
-              cursor: 'pointer',
+              cursor: loading ? 'not-allowed' : 'pointer',
+              opacity: loading ? 0.8 : 1,
             }}
-            onMouseEnter={(e) => (e.currentTarget.style.background = '#b8975e')}
-            onMouseLeave={(e) => (e.currentTarget.style.background = '#c8a96e')}
+            onMouseEnter={(e) => { if (!loading) e.currentTarget.style.background = '#b8975e' }}
+            onMouseLeave={(e) => { if (!loading) e.currentTarget.style.background = loading ? '#a89060' : '#c8a96e' }}
           >
-            Send Message
+            {loading ? 'Sending…' : 'Send Message'}
           </button>
-        </div>
+        </form>
 
         <style>{`
           @media (max-width: 768px) {
