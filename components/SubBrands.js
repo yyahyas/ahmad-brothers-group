@@ -1,35 +1,56 @@
 'use client'
 
 import { useState } from 'react'
-import { Truck, Gem, Sparkles } from 'lucide-react'
+import { Coffee, Gem, Zap, Package, ShoppingBag, Truck, Building2 } from 'lucide-react'
 
 const cards = [
   {
-    accentColor: '#c8a96e',
-    Icon: Truck,
+    Icon: Coffee,
     title: 'ABG Foods & Beverages',
     description:
-      "Pakistan's trusted food and beverage distribution network and manufacturing operations, serving retailers, wholesalers and institutions nationwide.",
+      "Pakistan's trusted food and beverage distribution network and manufacturing operations.",
     tags: ['Distribution', 'Manufacturing', 'B2B & B2C'],
     linkLabel: 'Explore Sector →',
   },
   {
-    accentColor: '#c8a96e',
     Icon: Gem,
     title: 'ABG Mines & Minerals',
     description:
-      'Premium natural stones including quartz, nephrite and other minerals — sourced directly, supplied globally. Trusted by builders and traders across Pakistan and beyond.',
-    tags: ['Quartz', 'Nephrite', 'Natural Marble', 'Export Ready'],
+      'Premium natural stones including quartz, nephrite and marble — sourced directly, supplied globally.',
+    tags: ['Quartz', 'Nephrite', 'Marble', 'Export'],
     linkLabel: 'Explore Sector →',
   },
   {
-    accentColor: 'rgba(255,255,255,0.3)',
-    Icon: Sparkles,
-    title: 'Expanding Horizons',
+    Icon: Zap,
+    title: 'ABG Energy',
     description:
-      "Ahmad Brothers Group is actively exploring new industries and opportunities. Our vision extends beyond today — building tomorrow's leading businesses.",
-    tags: ['Coming Soon', 'New Ventures'],
-    linkLabel: 'Our Vision →',
+      'Complete energy solutions including solar installations, LPG supply, generator services and energy auditing.',
+    tags: ['Solar', 'LPG', 'Generator', 'Energy Audit'],
+    linkLabel: 'Explore Sector →',
+  },
+  {
+    Icon: Package,
+    title: 'ABG Packaging',
+    description:
+      'Full range of disposable products from cups, plates and containers to bags, straws and diapers.',
+    tags: ['Disposables', 'B2B', 'Bulk Supply'],
+    linkLabel: 'Explore Sector →',
+  },
+  {
+    Icon: ShoppingBag,
+    title: 'ABG Consumer Products',
+    description:
+      'Wide range of household, personal care and FMCG products for everyday consumers across Pakistan.',
+    tags: ['Household', 'Personal Care', 'FMCG'],
+    linkLabel: 'Explore Sector →',
+  },
+  {
+    Icon: Truck,
+    title: 'ABG Logistics',
+    description:
+      'Nationwide trucking, warehousing, last mile delivery and cold chain logistics solutions.',
+    tags: ['Trucking', 'Warehousing', 'Cold Chain'],
+    linkLabel: 'Explore Sector →',
   },
 ]
 
@@ -46,106 +67,108 @@ function Card({ card }) {
         backgroundColor: hovered ? '#2d5a40' : '#1a3a2a',
         border: '0.5px solid rgba(255,255,255,0.08)',
         borderRadius: '12px',
-        overflow: 'hidden',
-        display: 'flex',
-        flexDirection: 'column',
+        padding: '40px 28px',
+        minHeight: '400px',
+        cursor: 'pointer',
         transition: 'all 0.3s ease',
         transform: hovered ? 'translateY(-4px)' : 'translateY(0)',
-        boxShadow: hovered
-          ? '0 16px 40px rgba(0,0,0,0.25)'
-          : '0 4px 16px rgba(0,0,0,0.12)',
+        display: 'flex',
+        flexDirection: 'column',
       }}
     >
       {/* Top accent bar */}
-      <div style={{ height: '3px', backgroundColor: card.accentColor, width: '100%' }} />
+      <div
+        style={{
+          height: '2px',
+          backgroundColor: '#c8a96e',
+          width: '100%',
+          marginBottom: '24px',
+        }}
+      />
 
-      {/* Card body */}
-      <div style={{ padding: '32px 32px 28px', display: 'flex', flexDirection: 'column', flex: 1 }}>
-        {/* Icon */}
-        <div
-          style={{
-            width: '48px',
-            height: '48px',
-            borderRadius: '8px',
-            backgroundColor: 'rgba(255,255,255,0.08)',
-            marginBottom: '24px',
-            flexShrink: 0,
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Icon size={24} color="#c8a96e" strokeWidth={1.5} />
-        </div>
-
-        {/* Title */}
-        <h3
-          style={{
-            fontFamily: 'var(--font-playfair)',
-            fontSize: '22px',
-            fontWeight: 500,
-            color: '#faf7f2',
-            margin: '0 0 14px',
-            lineHeight: 1.3,
-          }}
-        >
-          {card.title}
-        </h3>
-
-        {/* Description */}
-        <p
-          style={{
-            fontSize: '14px',
-            color: 'rgba(250,247,242,0.65)',
-            lineHeight: 1.75,
-            margin: '0 0 24px',
-            fontFamily: 'var(--font-inter)',
-            flex: 1,
-          }}
-        >
-          {card.description}
-        </p>
-
-        {/* Tags */}
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '28px' }}>
-          {card.tags.map((tag) => (
-            <span
-              key={tag}
-              style={{
-                backgroundColor: 'transparent',
-                color: '#c8a96e',
-                border: '0.5px solid rgba(200,169,110,0.3)',
-                fontSize: '11px',
-                fontFamily: 'var(--font-inter)',
-                fontWeight: 500,
-                padding: '4px 10px',
-                borderRadius: '100px',
-                letterSpacing: '0.2px',
-              }}
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Link */}
-        <a
-          href="#"
-          style={{
-            fontSize: '13px',
-            fontWeight: 500,
-            fontFamily: 'var(--font-inter)',
-            color: linkHovered ? '#faf7f2' : '#c8a96e',
-            textDecoration: 'none',
-            transition: 'color 0.2s',
-            letterSpacing: '0.2px',
-          }}
-          onMouseEnter={() => setLinkHovered(true)}
-          onMouseLeave={() => setLinkHovered(false)}
-        >
-          {card.linkLabel}
-        </a>
+      {/* Icon */}
+      <div
+        style={{
+          width: '44px',
+          height: '44px',
+          borderRadius: '8px',
+          backgroundColor: 'rgba(255,255,255,0.08)',
+          marginBottom: '20px',
+          flexShrink: 0,
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Icon size={24} color="#c8a96e" strokeWidth={1.5} />
       </div>
+
+      {/* Title */}
+      <h3
+        style={{
+          fontFamily: 'var(--font-playfair)',
+          fontSize: '20px',
+          fontWeight: 500,
+          color: '#faf7f2',
+          margin: '0 0 14px',
+          lineHeight: 1.3,
+        }}
+      >
+        {card.title}
+      </h3>
+
+      {/* Description */}
+      <p
+        style={{
+          fontSize: '14px',
+          color: 'rgba(250,247,242,0.65)',
+          lineHeight: 1.75,
+          margin: '0 0 20px',
+          fontFamily: 'var(--font-inter)',
+          flex: 1,
+        }}
+      >
+        {card.description}
+      </p>
+
+      {/* Tags */}
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginBottom: '24px' }}>
+        {card.tags.map((tag) => (
+          <span
+            key={tag}
+            style={{
+              backgroundColor: '#1a3a2a',
+              color: '#c8a96e',
+              border: '0.5px solid rgba(200,169,110,0.3)',
+              fontSize: '11px',
+              fontFamily: 'var(--font-inter)',
+              fontWeight: 500,
+              padding: '3px 9px',
+              borderRadius: '4px',
+            }}
+          >
+            {tag}
+          </span>
+        ))}
+      </div>
+
+      {/* Link */}
+      <a
+        href="#"
+        style={{
+          fontSize: '13px',
+          fontWeight: 500,
+          fontFamily: 'var(--font-inter)',
+          color: linkHovered ? '#faf7f2' : '#c8a96e',
+          textDecoration: 'none',
+          transition: 'color 0.2s',
+          letterSpacing: '0.2px',
+        }}
+        onMouseEnter={() => setLinkHovered(true)}
+        onMouseLeave={() => setLinkHovered(false)}
+      >
+        {card.linkLabel}
+      </a>
     </div>
   )
 }
@@ -155,10 +178,21 @@ export default function SubBrands() {
 
   return (
     <section id="businesses" style={{ backgroundColor: '#e0d5c5', padding: '80px 40px' }}>
+      <style>{`
+        .abg-grid {
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 640px) {
+          .abg-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (min-width: 1024px) {
+          .abg-grid { grid-template-columns: repeat(3, 1fr); }
+        }
+      `}</style>
       <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
 
         {/* ── Section header ── */}
-        <div style={{ textAlign: 'center', marginBottom: '60px' }}>
+        <div style={{ textAlign: 'center' }}>
           <p
             style={{
               fontSize: '13px',
@@ -212,20 +246,104 @@ export default function SubBrands() {
 
         {/* ── Cards grid ── */}
         <div
+          className="abg-grid"
           style={{
             display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-            gap: '28px',
-            marginBottom: '64px',
+            gap: '20px',
+            marginTop: '40px',
           }}
         >
           {cards.map((card) => (
             <Card key={card.title} card={card} />
           ))}
+
+          {/* ── Future Venture card (same grid cell as the others) ── */}
+          <div
+            style={{
+              backgroundColor: 'rgba(26,58,42,0.6)',
+              border: '1px dashed rgba(200,169,110,0.45)',
+              borderRadius: '12px',
+              padding: '40px 28px',
+              minHeight: '400px',
+              display: 'flex',
+              flexDirection: 'column',
+            }}
+          >
+          {/* Top accent bar */}
+          <div
+            style={{
+              height: '2px',
+              backgroundColor: 'rgba(200,169,110,0.55)',
+              width: '100%',
+              marginBottom: '24px',
+            }}
+          />
+
+          {/* Icon */}
+          <div
+            style={{
+              width: '44px',
+              height: '44px',
+              borderRadius: '8px',
+              backgroundColor: 'rgba(255,255,255,0.07)',
+              marginBottom: '20px',
+              flexShrink: 0,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}
+          >
+            <Building2 size={24} color="rgba(200,169,110,0.7)" strokeWidth={1.5} />
+          </div>
+
+          {/* Badge */}
+          <span
+            style={{
+              alignSelf: 'flex-start',
+              backgroundColor: 'rgba(200,169,110,0.12)',
+              color: '#c8a96e',
+              fontSize: '10px',
+              fontFamily: 'var(--font-inter)',
+              fontWeight: 500,
+              padding: '3px 10px',
+              borderRadius: '3px',
+              marginBottom: '12px',
+            }}
+          >
+            Future Venture
+          </span>
+
+          {/* Title */}
+          <h3
+            style={{
+              fontFamily: 'var(--font-playfair)',
+              fontSize: '20px',
+              fontWeight: 500,
+              color: 'rgba(250,247,242,0.75)',
+              margin: '0 0 8px',
+              lineHeight: 1.3,
+            }}
+          >
+            Real Estate
+          </h3>
+
+          {/* Description */}
+          <p
+            style={{
+              fontSize: '13px',
+              color: 'rgba(250,247,242,0.55)',
+              lineHeight: 1.7,
+              margin: 0,
+              fontFamily: 'var(--font-inter)',
+            }}
+          >
+            Residential and commercial real estate development across Pakistan.
+          </p>
+          </div>
         </div>
 
         {/* ── Bottom CTA ── */}
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', marginTop: '48px' }}>
           <p
             style={{
               fontSize: '15px',
